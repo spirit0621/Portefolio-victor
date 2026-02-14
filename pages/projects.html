@@ -25,7 +25,7 @@
   <section class="projects-section">
     <div class="container">
       <!-- Toolbar d'administration -->
-      <div class="admin-toolbar" style="text-align: right; margin-bottom: 2rem;">
+      <div class="admin-toolbar admin-only" style="text-align: right; margin-bottom: 2rem; display: none;">
         <button id="addProjectBtn" class="cta-button">➕ Ajouter un projet</button>
       </div>
 
@@ -84,7 +84,10 @@
   <div id="footer-placeholder"></div>
 
   <script src="../scripts/nav.js"></script>
-  <script src="../scripts/projects-manager.js"></script>
+  <!-- Modules Firebase & App -->
+  <script type="module" src="../scripts/firebase-config.js"></script>
+  <script type="module" src="../scripts/auth.js"></script>
+  <script type="module" src="../scripts/projects-manager.js"></script>
 </body>
 
 </html>

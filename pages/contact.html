@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Contact | Alves Fernandes</title>
   <link rel="stylesheet" href="../styles/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -26,52 +27,82 @@
   <section class="contact-section">
     <div class="container">
       <div class="contact-grid">
-        <div class="contact-form-wrapper">
-          <h2>Discutons</h2>
+        <div class="contact-form-wrapper contact-card">
+          <h2><i class="fas fa-envelope-open-text"></i> Discutons</h2>
           <form class="contact-form" id="contactForm">
-            <div class="form-group">
-              <label for="firstname">Prénom</label>
-              <input type="text" id="firstname" name="firstname">
-            </div>
+            <div class="form-row">
+                <div class="form-group half">
+                <label for="firstname">Prénom</label>
+                <div class="input-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="firstname" name="firstname" placeholder="Votre prénom">
+                </div>
+                </div>
 
-            <div class="form-group">
-              <label for="lastname">Nom</label>
-              <input type="text" id="lastname" name="lastname">
+                <div class="form-group half">
+                <label for="lastname">Nom</label>
+                <div class="input-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="lastname" name="lastname" placeholder="Votre nom">
+                </div>
+                </div>
             </div>
 
             <div class="form-group">
               <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required>
+              <div class="input-icon">
+                  <i class="fas fa-at"></i>
+                  <input type="email" id="email" name="email" required placeholder="votre@email.com">
+              </div>
             </div>
 
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea id="message" name="message" rows="6"></textarea>
+              <textarea id="message" name="message" rows="6" placeholder="Bonjour, je vous contacte pour..."></textarea>
             </div>
 
-            <button type="submit" class="cta-button">Envoyer</button>
+            <button type="submit" class="cta-button full-width"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
           </form>
         </div>
 
-        <div class="contact-info">
-          <h2>Me contacter</h2>
+        <div class="contact-info contact-card display-info">
+          <h2><i class="fas fa-address-card"></i> Mes coordonnées</h2>
+          <p class="contact-intro">N'hésitez pas à me contacter directement via ces canaux.</p>
 
-          <div class="info-item">
-            <h3>Réseaux sociaux</h3>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/victor-alves-fernandes/" class="social-link"
-                target="_blank">LinkedIn</a>
+          <div class="info-list">
+             <div class="info-item">
+                <div class="icon-box">
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+                <div class="info-content">
+                    <h3>LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/victor-alves-fernandes/" target="_blank">linkedin.com/in/victor-alves-fernandes</a>
+                </div>
             </div>
 
             <div class="info-item">
-              <h3>Email</h3>
-              <p><a href="mailto:alvesfernandes594@gmail.com">alvesfernandes594@gmail.com</a></p>
+                <div class="icon-box">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Email</h3>
+                    <a href="mailto:alvesfernandes594@gmail.com">alvesfernandes594@gmail.com</a>
+                </div>
             </div>
 
             <div class="info-item">
-              <h3>Téléphone</h3>
-              <p><a href="tel:+33660516173">06 60 51 61 73</a></p>
+                <div class="icon-box">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Téléphone</h3>
+                    <a href="tel:+33660516173">06 60 51 61 73</a>
+                </div>
             </div>
+          </div>
+          
+          <div class="availability-badge">
+              <i class="fas fa-check-circle"></i> Disponible pour de nouvelles opportunités
           </div>
         </div>
       </div>
