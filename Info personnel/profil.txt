@@ -1,0 +1,45 @@
+PROFIL PERSONNEL
+=================
+
+NOM COMPLET
+Alves Fernandes Victor
+
+ÂGE
+24 ans
+
+CARACTÉRISTIQUES
+- Motivé et ponctuel
+- Adapté aux situations
+- Bon esprit d'analyse
+- Capacité d'apprentissage
+- Travail en équipe
+
+À PROPOS
+--------
+
+Salut! Je m'appelle Alves Fernandes Victor et j'ai 24 ans.
+
+Je suis motivé et ponctuel, je m'adapte aux situations et je pense avoir un bon esprit d'analyse. 
+
+J'ai obtenu ma Licence Sciences Pour la Santé (LSPS) à l'université Paris-Est-Créteil-Val-de-Marne, ce qui m'a donné une base solide en sciences.
+
+Je suis actuellement en 2ème année de BTS Services Informatiques aux Organisations (BTS SIO SLAM) dans la spécialité de Solutions Logicielles et Applications Métier (SLAM) au CFA INSTA à Paris.
+
+Mon parcours m'a permis de développer:
+- Des compétences techniques en développement et RPA
+- Une compréhension des processus métier
+- Une capacité à analyser et résoudre les problèmes
+- Une expérience pratique en entreprise
+
+PARCOURS ACADÉMIQUE
+-------------------
+• Lycée: Bac S option SI
+• Licence: Sciences pour la Santé (LSPS)
+• Formation actuelle: BTS SIO SLAM (2ème année)
+• Formation future: Concepteur développeur d'applications
+
+OBJECTIF PROFESSIONNEL
+----------------------
+Devenir un expert en développement d'applications et automatisation,
+capable de concevoir et implémenter des solutions informatiques
+innovantes et performantes pour les organisations.

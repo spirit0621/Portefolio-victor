@@ -1,0 +1,44 @@
+EXPÉRIENCE PROFESSIONNELLE
+===========================
+
+1. STAGE - DÉVELOPPEUR RPA
+---------------------------
+
+Période: Février 2024 - Avril 2024
+Durée: 3 mois
+Entreprise: Eiffage
+Adresse: 2 Rue Hélène Boucher, 93330 Neuilly-Sur-Marne
+Poste: Support Développeur RPA
+
+Missions:
+- Création de différents bots avec Automation Anywhere
+- Apprentissage des principes du RPA (Robotic Process Automation)
+- Support et maintenance des processus automatisés
+- Documentation et tests des bots créés
+
+Compétences acquises:
+- RPA et Automation Anywhere
+- Processus d'automatisation
+- Analyse de processus métier
+
+
+2. ALTERNANCE - MAINTENANCE LÉGÈRE
+-----------------------------------
+
+Période: Septembre 2024 - Aujourd'hui
+Type: Contrat d'alternance
+Entreprise: Eiffage Globale Service
+Adresse: 2 Rue Paul Dautier, 78140 Vélizy-Villacoublay
+Poste: Alternant - Maintenance Légère
+
+Missions:
+- Maintenance légère des systèmes informatiques
+- Support technique utilisateur
+- Gestion des incidents IT
+- Configuration et déploiement de solutions IT
+
+Compétences utilisées:
+- Support système
+- Maintenance informatique
+- Gestion des incidents
+- Linux/Windows

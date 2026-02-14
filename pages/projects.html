@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Projets | Alves Fernandes</title>
+  <link rel="stylesheet" href="../styles/styles.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <!-- Navigation -->
+  <div id="header-placeholder"></div>
+
+  <!-- Page Header -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Mes Projets</h1>
+      <p>Projets créatifs et professionnels réalisés</p>
+    </div>
+  </section>
+
+  <!-- Projects Content -->
+  <section class="projects-section">
+    <div class="container">
+      <!-- Toolbar d'administration -->
+      <div class="admin-toolbar" style="text-align: right; margin-bottom: 2rem;">
+        <button id="addProjectBtn" class="cta-button">➕ Ajouter un projet</button>
+      </div>
+
+      <!-- Grille de projets (Remplie par JS) -->
+      <div class="projects-grid">
+        <!-- Les projets seront injectés ici par scripts/projects-manager.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal d'édition/Ajout -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modalTitle">Ajouter un projet</h2>
+      <form id="projectForm">
+        <input type="hidden" id="projectId">
+
+        <div class="form-group">
+          <label for="title">Titre du projet</label>
+          <input type="text" id="title" required placeholder="Ex: Site E-commerce">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Catégorie | Année</label>
+          <input type="text" id="category" required placeholder="Ex: Web Design | 2026">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description courte</label>
+          <textarea id="description" rows="3" required placeholder="Description du projet..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Image du projet</label>
+          <div id="dropZone" class="drop-zone">
+            <p>Glissez une image ici ou cliquez pour sélectionner</p>
+            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+            <img id="imagePreview" style="display: none; max-height: 100px; margin-top: 10px;">
+          </div>
+          <input type="text" id="image" placeholder="Ou copiez une URL d'image ici..." style="margin-top: 5px;">
+        </div>
+
+        <div class="form-group">
+          <label for="link">Lien du projet (Site, GitHub, Drive...)</label>
+          <input type="text" id="link" placeholder="https://..." style="margin-top: 5px;">
+        </div>
+
+        <button type="submit" class="cta-button" style="width: 100%; margin-top: 1rem;">Sauvegarder</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="../scripts/nav.js"></script>
+  <script src="../scripts/projects-manager.js"></script>
+</body>
+
+</html>

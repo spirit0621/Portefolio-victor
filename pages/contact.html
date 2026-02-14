@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact | Alves Fernandes</title>
+  <link rel="stylesheet" href="../styles/styles.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <!-- Navigation -->
+  <div id="header-placeholder"></div>
+
+  <!-- Page Header -->
+  <section class="page-hero">
+    <div class="container">
+
+      <h1>Contact</h1>
+      <p>Si vous souhaitez me contacter, veuillez remplir le formulaire ci-dessous.</p>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-form-wrapper">
+          <h2>Discutons</h2>
+          <form class="contact-form" id="contactForm">
+            <div class="form-group">
+              <label for="firstname">Prénom</label>
+              <input type="text" id="firstname" name="firstname">
+            </div>
+
+            <div class="form-group">
+              <label for="lastname">Nom</label>
+              <input type="text" id="lastname" name="lastname">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6"></textarea>
+            </div>
+
+            <button type="submit" class="cta-button">Envoyer</button>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <h2>Me contacter</h2>
+
+          <div class="info-item">
+            <h3>Réseaux sociaux</h3>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/victor-alves-fernandes/" class="social-link"
+                target="_blank">LinkedIn</a>
+            </div>
+
+            <div class="info-item">
+              <h3>Email</h3>
+              <p><a href="mailto:alvesfernandes594@gmail.com">alvesfernandes594@gmail.com</a></p>
+            </div>
+
+            <div class="info-item">
+              <h3>Téléphone</h3>
+              <p><a href="tel:+33660516173">06 60 51 61 73</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+  </form>
+  </div>
+  </div>
+  </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="../scripts/nav.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Merci pour votre message ! Je vous recontacterai dès que possible.');
+      this.reset();
+    });
+  </script>
+</body>
+
+</html>
