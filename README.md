@@ -13,7 +13,7 @@ Le site est hébergé sur Firebase Hosting et accessible ici :
 
 La documentation complète se trouve dans le dossier [`Documentation/`](./Documentation/).
 
-- **[Vue d'ensemble](./Documentation/README.md)** : Stack technique et fonctionnalités.
+- **[Vue d&#39;ensemble](./Documentation/README.md)** : Stack technique et fonctionnalités.
 - **[Architecture](./Documentation/ARCHITECTURE.md)** : Structure des fichiers et configuration Firebase.
 - **[Installation](./Documentation/INSTALLATION.md)** : Guide de déploiement et commandes CLI.
 

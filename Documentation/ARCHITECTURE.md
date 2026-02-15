@@ -4,38 +4,37 @@
 
 1. [Architecture Globale](#architecture-globale)
 2. [Structure des Fichiers](#structure-des-fichiers)
-3. [Design System & CSS](#design-system--css)
-4. [Guide des Pages](#guide-des-pages)
-5. [JavaScript & Interactivité](#javascript--interactivité)
-6. [Flux de Données & Firebase](#flux-de-données--firebase)
+3. [Stack Technique & Firebase](#stack-technique--firebase)
+4. [Design System & CSS](#design-system--css)
+5. [Logique Applicative (JavaScript)](#logique-applicative-javascript)
+6. [Modèle de Données (Firestore)](#modèle-de-données-firestore)
+7. [Workflow de Déploiement](#workflow-de-déploiement)
 
 ---
 
 ## Architecture Globale
 
-### Diagramme de flux (Firebase Hosting)
+Le projet est une **Single Page Application (SPA) hybride**.
+- **Frontend** : HTML5, CSS3, Vanilla JS.
+- **Backend (Serverless)** : Google Firebase.
+
+### Diagramme de flux
 
 ```text
-[Client / Navigateur]  <-- HTTPS / CDN -->  [Firebase Hosting]
-       │
-       ▼
-   [HTML5 Core]
-       ├── [CSS3 Styling] (styles.css + AOS + FontAwesome)
-       │      ├── Variables (:root)
-       │      ├── Responsive Grid
-       │      └── Animations
-       │
-       └── [JavaScript] (nav.js, animations.js, auth.js)
-              ├── DOM Manipulation
-              ├── Intersection Observer (AOS)
-              └── Firebase SDK (Auth, Firestore)
+[Visiteur]                [Admin / Moi]
+    │                          │
+    ▼                          ▼
+[Firebase Hosting] <---- [Firebase CLI] (Déploiement)
+    │
+    ├── [HTML/CSS] (Structure & Design)
+    │
+    └── [JavaScript Client]
+           ├── [Auth] <---> [Firebase Authentication] (Sécurisation)
+           │
+           └── [Data] <---> [Cloud Firestore] (Base de données NoSQL)
+                                   │
+                           [Collection: Projects]
 ```
-
-### Concepts Clés
-
-- **Hébergement CDN** : Firebase Hosting distribue le contenu statique globalement pour une latence minimale.
-- **Single Page Feel** : Bien que multi-pages, l'utilisation de `cleanUrls` et de rewrites donne une impression d'application fluide.
-- **Sécurité** : L'accès à l'administration est verrouillé par Firebase Authentication.
 
 ---
 
@@ -43,88 +42,105 @@
 
 ```text
 Portefolio/
-├── 📄 **pages/** (Le contenu HTML)
-│   ├── `index.html` : L'accueil principal.
-│   ├── `presentation.html` : Profil complet.
-│   ├── `projects.html` : Galerie de projets avec filtres.
-│   ├── `bts-sio.html` : Section diplôme BTS SIO.
-│   ├── `monitoring.html` : Veille technologique.
-│   ├── `contact.html` : Formulaire de contact.
-│   └── `admin-login.html` : Portail de connexion admin.
+├── 📄 **pages/** (Vues)
+│   ├── `index.html` : Accueil.
+│   ├── `projects.html` : Galerie dynamique (CRUD).
+│   ├── `presentation.html` : CV et parcours.
+│   ├── `contact.html` : Formulaire.
+│   └── `admin-login.html` : Interface de connexion.
 │
-├── 🎨 **styles/** (Le design)
-│   └── `styles.css` : Feuille de style principale.
+├── 🎨 **styles/** (Design)
+│   └── `styles.css` : Feuille de style unique (Grid, Flexbox, Variables).
 │
-├── 🔧 **scripts/** (La logique)
-│   ├── `nav.js` : Injection dynamique Navbar/Footer.
-│   ├── `animations.js` : Logique d'animation spécifique.
-│   ├── `auth.js` : Gestion de l'authentification Firebase.
-│   └── `firebase-config.js` : Iniitialisation Firebase.
+├── 🔧 **scripts/** (Logique)
+│   ├── `firebase-config.js` : Initialisation SDK Firebase (v12.9.0).
+│   ├── `auth.js` : Gestion connexion/déconnexion et état utilisateur.
+│   ├── `projects-manager-v2.js` : Cœur de la gestion de projets (Affichage + Admin).
+│   ├── `nav.js` : Injection dynamique du menu et footer.
+│   └── `animations.js` : Effets visuels (AOS, barres de compétences).
 │
-├── ⚙️ **Configuration Racine**
-│   ├── `firebase.json` : Règles de rewrites, redirects, headers.
-│   ├── `.firebaserc` : Alias des projets Firebase.
-│   ├── `sitemap.xml` : Plan du site pour SEO.
-│   └── `index.html` : Redirection racine vers pages/index.html.
-│
-└── 🖼️ **assets/Photo/** (Médias)
-    └── Images optimisées pour le web.
+└── ⚙️ **Config**
+    ├── `firebase.json` : Configuration Hosting (règles, ignorés).
+    └── `.firebaserc` : Alias du projet (portefolio-a0995).
 ```
+
+---
+
+## Stack Technique & Firebase
+
+Le projet repose entièrement sur l'écosystème **Firebase** (Google Cloud) pour sa robustesse et sa gratuité (Spark Plan).
+
+| Service | Usage dans le projet |
+| :--- | :--- |
+| **Hosting** | Hébergement statique rapide (CDN global), SSL inclus automatiquement. |
+| **Authentication** | Gestion des utilisateurs (Email/Password). Sécurise l'accès aux fonctions d'admin. |
+| **Firestore** | Base de données NoSQL temps réel. Stocke les projets (Titre, Image, Desc...). |
 
 ---
 
 ## Design System & CSS
 
-Le fichier `styles.css` est le cœur visuel du projet.
+L'interface est conçue "From Scratch" (sans Bootstrap) pour une performance maximale et un design unique.
 
-### Bibliothèques Externes (Intégrées via CDN)
-- **FontAwesome** : Icônes (v6.4.0).
-- **AOS (Animate On Scroll)** : Animations d'apparition au défilement.
-
-### Variables Globales
-```css
-:root {
-  --primary: #2c3e50;
-  --secondary: #3498db;
-  --accent: #e74c3c;
-  --light: #ecf0f1;
-  --dark: #1a1a1a;
-}
-```
+### Points Clés
+- **CSS Grid** : Utilisé pour la galerie de projets (`projects-grid`) afin de gérer l'alignement responsive (1 à 3 colonnes).
+- **Flexbox** : Utilisé pour les mises en page internes (cartes, navbar).
+- **Variables CSS** : Gestion centralisée des couleurs et espacements.
+- **Responsive** :
+  - Mobile (< 768px) : Menu burger, colonnes empilées.
+  - Desktop (> 1024px) : Mises en page complexes, sidebars.
 
 ---
 
-## Guide des Pages
+## Logique Applicative (JavaScript)
 
-### Routage (Firebase Rewrites)
-Le fichier `firebase.json` gère les "belles URLs".
-- `/projets` -> `pages/projects.html`
-- `/admin` -> `pages/admin-login.html`
-- `/login` -> `pages/admin-login.html`
-- `/bts-sio` -> `pages/bts-sio.html`
-
-### Pages Admin
-- **`admin-login.html`** : Formulaire de connexion simple. Utilise `auth.js` pour communiquer avec Firebase Auth.
-- **Tableau de bord** : Une fois connecté, l'utilisateur voit apparaître les boutons d'édition (CRUD) sur les pages (Projets, Veille).
-
----
-
-## JavaScript & Interactivité
-
-Le projet utilise **ES6 Modules** pour une meilleure organisation.
-
-### `nav.js`
-Injecte le header et le footer dans des placeholders (`#header-placeholder`, `#footer-placeholder`) pour éviter la duplication de code HTML.
+### `projects-manager-v2.js`
+C'est le script le plus complexe. Il gère deux états :
+1.  **Mode Visiteur** :
+    - Récupère les projets depuis Firestore (`getDocs`).
+    - Génère le HTML des cartes (`createProjectCard`).
+    - Injecte les cartes dans la grille.
+2.  **Mode Admin** (si connecté) :
+    - Affiche les boutons "Modifier" et "Supprimer" sur chaque carte.
+    - Affiche le bouton "Ajouter un projet".
+    - Gère la modale de formulaire (Création/Édition).
+    - Gère l'upload d'image (conversion en Base64 pour stockage direct).
 
 ### `auth.js`
-Gère l'état de connexion :
-- `onAuthStateChanged` : Surveille si l'utilisateur est connecté.
-- Modifie le DOM pour afficher/masquer les boutons "Admin", "Logout", "Edit".
+- Surveille l'état de l'authentification (`onAuthStateChanged`).
+- Si connecté : Affiche le bouton "Déconnexion" et active le mode admin des scripts.
+- Si déconnecté : Redirige vers le login si on essaie d'accéder à l'admin.
 
 ---
 
-## Flux de Données & Firebase
+## Modèle de Données (Firestore)
 
-1.  **Hébergement** : Tout le contenu est servi par Firebase Hosting.
-2.  **Authentification** : `auth.js` contacte Firebase Auth lors du login.
-3.  **Base de Données (Projets dynamiques)** : Les scripts chargent les données depuis Firestore (si activé) pour afficher les projets et la veille technologique, permettant une mise à jour sans redéploiement du code.
+Les données sont stockées dans une collection nommée **`projects`**.
+
+### Schéma d'un document "Project" :
+
+| Champ | Type | Description |
+| :--- | :--- | :--- |
+| `id` | String | ID unique généré par Firestore. |
+| `title` | String | Titre du projet. |
+| `category` | String | Ex: "Web | 2024". Sert aussi au tri. |
+| `description`| String | Texte court de présentation. |
+| `image` | Base64 | Image encodée en chaîne de caractères (stockage direct). |
+| `link` | String | URL vers le site ou le GitHub. |
+
+---
+
+## Workflow de Déploiement
+
+Le site utilise le **Firebase CLI** pour les mises à jour.
+
+1.  **Développement** : Test local via `python -m http.server` ou `firebase emulators:start`.
+2.  **Build** : Aucune étape de build nécessaire (Code natif).
+3.  **Déploiement** :
+    ```bash
+    firebase deploy
+    ```
+    Cette commande :
+    - Upload les fichiers du dossier `public` (configuré comme `.` racine).
+    - Met à jour les règles de sécurité Firestore (si modifiées).
+    - Vide le cache du CDN pour que les changements soient immédiats.
