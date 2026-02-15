@@ -88,7 +88,7 @@ function createProjectCard(project) {
         <div class="project-info-v2" style="padding: 1.5rem; display: flex; flex-direction: column; background: white; overflow-y: auto;">
             <h3 style="margin-top: 0; color: #2c3e50; font-size: 1.2rem;">${project.title}</h3>
             <p class="project-category" style="color: #3498db; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">${project.category}</p>
-            <p style="margin-bottom: 1rem; color: #555; font-size: 0.95rem; line-height: 1.4;">${project.description}</p>
+            <p style="margin-bottom: 1rem; color: #555; font-size: 0.95rem; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word;">${project.description}</p>
             <div class="project-actions admin-only" style="display: none; margin-top: auto; padding-top: 1rem; border-top: 1px solid #eee;">
                 <button class="cta-button" style="padding: 5px 10px; font-size: 0.8rem; background-color: #f39c12; margin-right: 5px;" onclick="window.prepareEdit('${project.id}')">Modifier</button>
                 <button class="cta-button" style="padding: 5px 10px; font-size: 0.8rem; background-color: #e74c3c;" onclick="window.deleteProject('${project.id}')">Supprimer</button>
