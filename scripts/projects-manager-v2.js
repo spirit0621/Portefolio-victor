@@ -43,6 +43,14 @@ function renderProjects() {
     if (!grid) return;
 
     grid.innerHTML = ''; // Clear grid
+    
+    // FORCE GRID CONTAINER STYLES - Prevent single card from stretching
+    grid.style.display = 'grid';
+    grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
+    grid.style.gap = '2rem';
+    grid.style.justifyContent = 'center'; // Center the grid items if fewer than row
+    grid.style.padding = '2rem 0';
+
 
     if (projects.length === 0) {
         grid.innerHTML = '<p style="text-align: center; width: 100%;">Aucun projet pour le moment.</p>';
@@ -65,8 +73,8 @@ function createProjectCard(project) {
     
     // FORCE GRID LAYOUT - INLINE STYLES ARE STRONGEST
     card.style.display = 'grid';
-    card.style.gridTemplateRows = '250px 1fr'; 
-    card.style.height = '100%';
+    card.style.gridTemplateRows = '250px 250px'; // FIXED HEIGHTS: 250px Image, 250px Content
+    card.style.height = '500px'; // OVERALL FIXED HEIGHT
     card.style.border = '1px solid #eee';
     card.style.borderRadius = '12px';
     card.style.overflow = 'hidden';
@@ -75,17 +83,19 @@ function createProjectCard(project) {
     
     card.innerHTML = `
         <div class="project-image-v2" style="width: 100%; height: 100%; position: relative; background: #f8f9fa; border-bottom: 1px solid #eee; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-            <img src="${project.image}" alt="${project.title}" style="max-width: 100%; max-height: 100%; object-fit: contain; display: block;" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
+            <img src="${project.image}" alt="${project.title}" style="width: 100%; height: 100%; object-fit: contain; display: block;" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
         </div>
-        <div class="project-info-v2" style="padding: 1.5rem; display: flex; flex-direction: column; background: white;">
-            <h3 style="margin-top: 0; color: #2c3e50;">${project.title}</h3>
-            <p class="project-category" style="color: #3498db; font-weight: 600; margin-bottom: 0.5rem;">${project.category}</p>
-            <p style="margin-bottom: 1rem; color: #333;">${project.description}</p>
+        <div class="project-info-v2" style="padding: 1.5rem; display: flex; flex-direction: column; background: white; overflow-y: auto;">
+            <h3 style="margin-top: 0; color: #2c3e50; font-size: 1.2rem;">${project.title}</h3>
+            <p class="project-category" style="color: #3498db; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">${project.category}</p>
+            <p style="margin-bottom: 1rem; color: #555; font-size: 0.95rem; line-height: 1.4;">${project.description}</p>
             <div class="project-actions admin-only" style="display: none; margin-top: auto; padding-top: 1rem; border-top: 1px solid #eee;">
                 <button class="cta-button" style="padding: 5px 10px; font-size: 0.8rem; background-color: #f39c12; margin-right: 5px;" onclick="window.prepareEdit('${project.id}')">Modifier</button>
                 <button class="cta-button" style="padding: 5px 10px; font-size: 0.8rem; background-color: #e74c3c;" onclick="window.deleteProject('${project.id}')">Supprimer</button>
             </div>
-            ${getLinkHtml(project)}
+            <div style="margin-top: auto;"> <!-- Push link to bottom if space -->
+                ${getLinkHtml(project)}
+            </div>
         </div>
     `;
     return card;
