@@ -116,6 +116,7 @@ Couleurs et paramètres modifiables depuis un seul endroit.
 ## Guide des Pages
 
 ### Focus : Page Présentation (`presentation.html`)
+
 Cette page illustre l'utilisation de composants complexes.
 
 #### Structure
