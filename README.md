@@ -1,37 +1,45 @@
-# Portfolio
+# Portfolio - Alves Fernandes
 
-Ce dépôt contient une version statique du portfolio basée sur les captures d'écran dans le dossier `assets/Photo/`.
+Ce dépôt contient le code source du portfolio personnel d'Alves Fernandes, une vitrine professionnelle moderne et interactive.
 
-## Structure du projet
+## 🚀 En ligne
 
-```
-Portefolio/
-├── pages/              # Pages HTML
-├── styles/             # Feuilles CSS
-├── scripts/            # JavaScript et utilitaires
-├── assets/Photo/       # Images galerie
-├── Documentation/      # Guides techniques
-└── index.html          # Redirection vers pages/
-```
+Le site est hébergé sur Firebase Hosting et accessible ici :
+👉 **[https://victor-alves-fernandes-portfolio.web.app](https://victor-alves-fernandes-portfolio.web.app)**
 
-## Pour voir le site localement
+---
+
+## 📚 Documentation
+
+La documentation complète se trouve dans le dossier [`Documentation/`](./Documentation/).
+
+- **[Vue d'ensemble](./Documentation/README.md)** : Stack technique et fonctionnalités.
+- **[Architecture](./Documentation/ARCHITECTURE.md)** : Structure des fichiers et configuration Firebase.
+- **[Installation](./Documentation/INSTALLATION.md)** : Guide de déploiement et commandes CLI.
+
+---
+
+## 🛠️ Stack Technique
+
+- **Frontend** : HTML5, CSS3 (Variables, Grid), Vanilla JS (ES6+).
+- **Backend / Cloud** : Firebase (Hosting, Auth, Firestore).
+- **Animations** : AOS (Animate On Scroll) + CSS Transitions.
+- **Déploiement** : Firebase CLI.
+
+---
+
+## ⚡ Installation Rapide
 
 ```bash
-python -m http.server 8000
-# puis ouvrez http://localhost:8000
+# 1. Cloner
+git clone https://github.com/spirit0621/Portefolio.git
+cd Portefolio
+
+# 2. Installer les dépendances (Firebase Tools)
+npm install -g firebase-tools
+
+# 3. Lancer en local
+firebase serve
 ```
 
-## Déploiement GitHub Pages
-
-Le site est déployé automatiquement sur GitHub Pages à chaque `git push`.
-
-👉 URL: https://spirit0621.github.io/Portefolio/
-
-## Documentation
-
-Consultez le dossier `Documentation/` pour les guides complets:
-
-- **INDEX.md** - Point d'entrée
-- **README.md** - Guide technique
-- **ARCHITECTURE.md** - Détails architecture
-- **INSTALLATION.md** - Installation et déploiement
+Ouvrez `http://localhost:5000` pour voir le résultat.

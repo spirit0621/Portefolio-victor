@@ -3,7 +3,7 @@
 ## Table des matières
 1. [Prérequis](#prérequis)
 2. [Installation Locale](#installation-locale)
-3. [Déploiement GitHub Pages](#déploiement-github-pages)
+3. [Déploiement Firebase](#déploiement-firebase)
 4. [Workflow de Développement](#workflow-de-développement)
 5. [Dépannage (Troubleshooting)](#dépannage-troubleshooting)
 
@@ -11,88 +11,85 @@
 
 ## Prérequis
 
-- **Système** : Windows, macOS ou Linux.
-- **Outils** :
-    - [Git](https://git-scm.com/) (pour le versioning).
-    - [Python](https://www.python.org/) (recommandé pour le serveur local) OU Node.js.
-    - Un éditeur de code (ex: VS Code).
-- **Compte** : GitHub (pour l'hébergement).
+- **Node.js** (v16 ou supérieur) : Nécessaire pour les outils Firebase.
+- **Git** : Pour cloner le projet.
+- **Compte Google** : Pour accéder à la console Firebase.
+- **Éditeur** : VS Code recommandé.
 
 ---
 
 ## Installation Locale
 
 ### 1. Cloner le projet
-Ouvrez votre terminal et exécutez :
 ```bash
 git clone https://github.com/spirit0621/Portefolio.git
 cd Portefolio
 ```
 
-### 2. Lancer le serveur
-Pour tester le site localement, il faut un serveur HTTP (pour que les chemins relatifs et JS fonctionnent correctement).
-
-**Option A (Python 3 - Recommandé)**
+### 2. Installer la CLI Firebase
+Ouvrez un terminal et installez les outils en global :
 ```bash
-python -m http.server 8000
+npm install -g firebase-tools
 ```
 
-**Option B (Node.js)**
+### 3. Connexion
+Connectez l'outil à votre compte Google :
 ```bash
-npx http-server -p 8000
+firebase login
 ```
+*(Une fenêtre de navigateur s'ouvrira pour autoriser l'accès)*
 
-### 3. Accéder au site
-Ouvrez votre navigateur à l'adresse : `http://localhost:8000`
+### 4. Lancer le serveur de développement
+Pour tester le site (y compris les rewrites et clean URLs) :
+```bash
+firebase serve
+```
+Le site sera accessible sur `http://localhost:5000`.
 
 ---
 
-## Déploiement GitHub Pages
+## Déploiement Firebase
 
-Le site est configuré pour se déployer automatiquement via GitHub Pages.
+Le site est hébergé sur **Firebase Hosting**.
 
-### Configuration Initiale
-1.  Allez sur votre dépôt GitHub > **Settings**.
-2.  Section **Pages** (menu gauche).
-3.  **Source** : `Deploy from a branch`.
-4.  **Branch** : `main` / dossier `/ (root)`.
-5.  Cliquez sur **Save**.
-
-### Mise à jour du site
-Chaque `git push` sur la branche `main` déclenche un redéploiement.
+### Commande de déploiement
+Pour mettre en ligne vos modifications sur la production :
 ```bash
-git add .
-git commit -m "Description de vos changements"
-git push origin main
+firebase deploy --only hosting
 ```
-*Le site sera mis à jour en 1 à 2 minutes.*
+
+Cette commande va :
+1.  Uploader les fichiers modifiés.
+2.  Mettre à jour la configuration (rewrites, redirects).
+3.  Vider le cache CDN.
+
+L'URL de production est : `https://victor-alves-fernandes-portfolio.web.app`
 
 ---
 
 ## Workflow de Développement
 
-1.  **Modification** : Éditez vos fichiers HTML/CSS localement.
-2.  **Test** : Rafraîchissez `http://localhost:8000` pour voir les changements.
-3.  **Validation** : Vérifiez que la navigation et les images fonctionnent.
-4.  **Déploiement** : Poussez vos changements sur GitHub.
+1.  **Code** : Modifiez vos fichiers HTML/CSS/JS.
+2.  **Test** : Vérifiez le rendu avec `firebase serve`.
+3.  **Commit** : Sauvegardez vos changements avec Git (`git add .`, `git commit`).
+4.  **Deploy** : Mettez en ligne avec `firebase deploy`.
 
 ---
 
 ## Dépannage (Troubleshooting)
 
-### Images ne s'affichent pas
-- **Cause** : Chemin incorrect ou sensibilité à la casse (Case Sensitivity).
-- **Solution** : Vérifiez que le nom du fichier dans le HTML correspond *exactement* au nom du fichier dans le dossier `Photo/` (extensions incluses .png/.jpg).
-- **Astuce** : Évitez les espaces et accents dans les noms de fichiers images.
+### Erreur "Command not found: firebase"
+- **Cause** : Node.js ou firebase-tools mal installé.
+- **Solution** : Vérifiez l'installation de Node (`node -v`) et réinstallez la CLI.
 
-### Styles CSS non appliqués
-- **Cause** : Cache du navigateur.
-- **Solution** : Forcez le rafraîchissement avec `Ctrl + F5` (Windows) ou `Cmd + Shift + R` (Mac).
+### Erreur 404 sur une page (/admin, /bts-sio)
+- **Cause** : Configuration `firebase.json` incorrecte ou non déployée.
+- **Solution** : Vérifiez que les "rewrites" pointent vers le bon fichier dans `pages/`. Relancez `firebase deploy`.
 
-### Navigation inactive (pas de surlignage)
-- **Cause** : Script `nav.js` non chargé ou chemin URL différent.
-- **Solution** : Vérifiez la console (F12) pour les erreurs JS. Assurez-vous d'être sur la page correspondante au lien `href`.
+### Problème de droits (Permission Denied)
+- **Cause** : Vous n'êtes pas connecté au bon compte.
+- **Solution** : Lancez `firebase logout` puis `firebase login`.
 
-### Erreur 404 sur GitHub Pages
-- **Cause** : Délai de déploiement ou chemin incorrect.
-- **Solution** : Attendez quelques minutes après le push. Vérifiez que `index.html` est bien à la racine du dépôt.
+### Modifications non visibles
+- **Cause** : Cache navigateur.
+- **Solution** : Testez en navigation privée ou forcez le rafraîchissement (`Ctrl + Shift + R`).
