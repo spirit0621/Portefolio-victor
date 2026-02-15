@@ -61,17 +61,28 @@ function renderProjects() {
 // Create Project Card HTML
 function createProjectCard(project) {
     const card = document.createElement('div');
-    card.className = 'project-card';
+    card.className = 'project-card-v2'; // RENAMED CLASS
+    
+    // FORCE GRID LAYOUT - INLINE STYLES ARE STRONGEST
+    card.style.display = 'grid';
+    card.style.gridTemplateRows = '250px 1fr'; 
+    card.style.height = '100%';
+    card.style.border = '1px solid #eee';
+    card.style.borderRadius = '12px';
+    card.style.overflow = 'hidden';
+    card.style.backgroundColor = 'white';
+    card.style.position = 'relative'; // Ensure context
+    
     card.innerHTML = `
-        <div class="project-image">
-            <img src="${project.image}" alt="${project.title}" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
+        <div class="project-image-v2" style="width: 100%; height: 100%; position: relative; background: #f8f9fa; border-bottom: 1px solid #eee; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            <img src="${project.image}" alt="${project.title}" style="max-width: 100%; max-height: 100%; object-fit: contain; display: block;" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
         </div>
-        <div class="project-info">
-            <h3>${project.title}</h3>
-            <p class="project-category">${project.category}</p>
-            <p>${project.description}</p>
-            <div class="project-actions admin-only" style="display: none;">
-                <button class="cta-button" style="padding: 5px 10px; font-size: 0.8rem; background-color: #f39c12;" onclick="window.prepareEdit('${project.id}')">Modifier</button>
+        <div class="project-info-v2" style="padding: 1.5rem; display: flex; flex-direction: column; background: white;">
+            <h3 style="margin-top: 0; color: #2c3e50;">${project.title}</h3>
+            <p class="project-category" style="color: #3498db; font-weight: 600; margin-bottom: 0.5rem;">${project.category}</p>
+            <p style="margin-bottom: 1rem; color: #333;">${project.description}</p>
+            <div class="project-actions admin-only" style="display: none; margin-top: auto; padding-top: 1rem; border-top: 1px solid #eee;">
+                <button class="cta-button" style="padding: 5px 10px; font-size: 0.8rem; background-color: #f39c12; margin-right: 5px;" onclick="window.prepareEdit('${project.id}')">Modifier</button>
                 <button class="cta-button" style="padding: 5px 10px; font-size: 0.8rem; background-color: #e74c3c;" onclick="window.deleteProject('${project.id}')">Supprimer</button>
             </div>
             ${getLinkHtml(project)}
@@ -142,6 +153,7 @@ window.prepareEdit = function (id) {
         preview.style.display = 'block';
     } else {
         preview.style.display = 'none';
+        preview.removeAttribute('src'); // Clean up
     }
 
     const linkField = document.getElementById('link');

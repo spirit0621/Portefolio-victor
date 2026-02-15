@@ -642,11 +642,14 @@ h3 {
 
 .project-card {
   background: white;
-  border: 1px solid #eee;
   border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #eee;
+  display: flex; /* NEW */
+  flex-direction: column; /* NEW: Stack image then content */
+  height: 100%; /* NEW */
 }
 
 .project-card:hover {
@@ -656,15 +659,31 @@ h3 {
 
 .project-image {
   width: 100%;
-  height: 200px;
+  height: 250px;
+  flex-shrink: 0; /* NEW: Prevent shrinking */
   overflow: hidden;
-  background: var(--light);
+  background: #f8f9fa;
+  position: relative;
+  border-bottom: 1px solid #eee;
+  display: block;
 }
 
 .project-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Back to cover for better aesthetic, now that container is safe */
+  display: block;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image covers area without distortion */
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05); /* Zoom effect on hover */
 }
 
 .project-info {
@@ -3396,3 +3415,11 @@ ADMINISTRATION & CRUD PROJETS
 }
 /* Admin Styles */
 .admin-only { display: none; }
+
+/* Image Preview in Modal */
+.preview-img { display: none; width: 100%; max-height: 300px; object-fit: contain; margin-top: 1rem; border-radius: 8px; border: 1px solid #ddd; background-color: #f8f9fa; }
+
+/* Fix Project Card Image - Simplified */
+.project-image { width: 100%; height: 250px; overflow: hidden; background: var(--light); position: relative; display: block; }
+.project-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s ease; display: block; }
+
