@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "portefolio-a0995"
-  }
+  },
+  "targets": {
+    "portefolio-a0995": {
+      "hosting": {
+        "mon-portfolio-pro": [
+          "victor-alves-portfolio"
+        ],
+        "site_pro": [
+          "victor-alves-fernandes-portfolio"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

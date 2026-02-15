@@ -29,7 +29,12 @@
       <div class="contact-grid">
         <div class="contact-form-wrapper contact-card">
           <h2><i class="fas fa-envelope-open-text"></i> Discutons</h2>
-          <form class="contact-form" id="contactForm">
+          <form class="contact-form" id="contactForm" action="https://formsubmit.co/alvesfernandes594@gmail.com" method="POST">
+            <!-- Configuration FormSubmit -->
+            <input type="hidden" name="_next" value="https://victor-alves-fernandes-portfolio.web.app/pages/contact.html">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="Nouveau message du portfolio !">
+            <input type="hidden" name="_template" value="table">
             <div class="form-row">
                 <div class="form-group half">
                 <label for="firstname">Prénom</label>
@@ -79,27 +84,6 @@
                     <a href="https://www.linkedin.com/in/victor-alves-fernandes/" target="_blank">linkedin.com/in/victor-alves-fernandes</a>
                 </div>
             </div>
-
-            <div class="info-item">
-                <div class="icon-box">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="info-content">
-                    <h3>Email</h3>
-                    <a href="mailto:alvesfernandes594@gmail.com">alvesfernandes594@gmail.com</a>
-                </div>
-            </div>
-
-            <div class="info-item">
-                <div class="icon-box">
-                    <i class="fas fa-phone-alt"></i>
-                </div>
-                <div class="info-content">
-                    <h3>Téléphone</h3>
-                    <a href="tel:+33660516173">06 60 51 61 73</a>
-                </div>
-            </div>
-          </div>
           
           <div class="availability-badge">
               <i class="fas fa-check-circle"></i> Disponible pour de nouvelles opportunités
@@ -118,13 +102,7 @@
   <div id="footer-placeholder"></div>
 
   <script src="../scripts/nav.js"></script>
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      alert('Merci pour votre message ! Je vous recontacterai dès que possible.');
-      this.reset();
-    });
-  </script>
+
 </body>
 
 </html>

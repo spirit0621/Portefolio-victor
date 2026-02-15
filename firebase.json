@@ -1,9 +1,76 @@
 {
   "hosting": {
+    "target": "site_pro",
     "public": ".",
     "ignore": [
       "firebase.json",
+      "**/.*",
       "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "rewrites": [
+      {
+        "source": "/admin",
+        "destination": "/pages/admin-login.html"
+      },
+      {
+        "source": "/admin-login.html",
+        "destination": "/pages/admin-login.html"
+      },
+      {
+        "source": "/login",
+        "destination": "/pages/admin-login.html"
+      },
+      {
+        "source": "/projets",
+        "destination": "/pages/projects.html"
+      },
+      {
+        "source": "/projects",
+        "destination": "/pages/projects.html"
+      },
+      {
+        "source": "/projects.html",
+        "destination": "/pages/projects.html"
+      },
+      {
+        "source": "/presentation",
+        "destination": "/pages/presentation.html"
+      },
+      {
+        "source": "/presentation.html",
+        "destination": "/pages/presentation.html"
+      },
+      {
+        "source": "/contact",
+        "destination": "/pages/contact.html"
+      },
+      {
+        "source": "/contact.html",
+        "destination": "/pages/contact.html"
+      },
+      {
+        "source": "/bts-sio",
+        "destination": "/pages/bts-sio.html"
+      },
+      {
+        "source": "/bts-sio.html",
+        "destination": "/pages/bts-sio.html"
+      },
+      {
+        "source": "/monitoring",
+        "destination": "/pages/monitoring.html"
+      },
+      {
+        "source": "/monitoring.html",
+        "destination": "/pages/monitoring.html"
+      },
+
+      {
+        "source": "/",
+        "destination": "/pages/index.html"
+      }
     ]
   }
 }
