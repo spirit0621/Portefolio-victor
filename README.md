@@ -40,6 +40,9 @@ npm install -g firebase-tools
 
 # 3. Lancer en local
 firebase serve
+
+# 4. Push sur firebase
+firebase deploy
 ```
 
 Ouvrez `http://localhost:5000` pour voir le résultat.
