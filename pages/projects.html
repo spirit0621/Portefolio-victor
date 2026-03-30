@@ -25,8 +25,23 @@
   <section class="projects-section">
     <div class="container">
       <!-- Toolbar d'administration -->
-      <div class="admin-toolbar admin-only" style="text-align: right; margin-bottom: 2rem; display: none;">
+      <div class="admin-toolbar admin-only" style="text-align: right; margin-bottom: 1rem; display: none;">
         <button id="addProjectBtn" class="cta-button">➕ Ajouter un projet</button>
+      </div>
+
+      <!-- Barre de filtrage -->
+      <div class="filter-toolbar" style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 2rem;">
+        <input type="text" id="projectFilter" placeholder="🔍 Rechercher un projet..." style="padding: 12px 20px; width: 100%; max-width: 300px; border-radius: 25px; border: 1px solid #ddd; font-size: 1rem; outline: none; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+        
+        <select id="categoryFilter" style="padding: 12px 20px; border-radius: 25px; border: 1px solid #ddd; font-size: 1rem; outline: none; cursor: pointer; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+          <option value="">Toutes catégories</option>
+          <!-- Les options seront générées par le JS -->
+        </select>
+
+        <select id="dateFilter" style="padding: 12px 20px; border-radius: 25px; border: 1px solid #ddd; font-size: 1rem; outline: none; cursor: pointer; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+          <option value="">Toutes dates</option>
+          <!-- Les options seront générées par le JS -->
+        </select>
       </div>
 
       <!-- Grille de projets (Remplie par JS) -->

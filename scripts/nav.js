@@ -4,9 +4,9 @@
 var NAVBAR_HTML = `
   <nav class="navbar">
     <div class="nav-container">
-      <a href="./index.html" class="nav-logo">Alves Fernandes</a>
+      <a href="/" class="nav-logo">Alves Fernandes</a>
       <ul class="nav-menu">
-        <li><a href="./index.html" class="nav-link">Accueil</a></li>
+        <li><a href="/" class="nav-link">Accueil</a></li>
         <li><a href="./presentation.html" class="nav-link">Présentation</a></li>
         <li><a href="./projects.html" class="nav-link">Projets</a></li>
         <li><a href="./monitoring.html" class="nav-link">Veille Technologique</a></li>
@@ -65,14 +65,18 @@ function initGlobalElements() {
     if (!href) return;
 
     var cleanHref = href.replace('./', '');
+    if (cleanHref === '') cleanHref = '/';
 
     // Cas spécial pour la page d'accueil
-    if (currentPage === '' || currentPage === '/') currentPage = 'index.html';
+    if (currentPage === '' || currentPage === 'index.html' || currentPage === '/') currentPage = '/';
 
-    if (cleanHref === currentPage) {
-      link.classList.add('active');
+    // Si on pointe vers / (accueil) et qu'on y est
+    if ((cleanHref === '/' || cleanHref === 'index.html') && currentPage === '/') {
+       link.classList.add('active');
+    } else if (cleanHref === currentPage && cleanHref !== '/') {
+       link.classList.add('active');
     } else {
-      link.classList.remove('active');
+       link.classList.remove('active');
     }
   });
 }

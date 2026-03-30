@@ -8,6 +8,7 @@
 5. [Squelette et structure](#squelette-et-structure)
 6. [Fichiers et fonctionnement](#fichiers-et-fonctionnement)
 7. [Installation et Déploiement](#installation-et-déploiement)
+8. [Écosystème Web](#écosystème-web)
 
 ---
 
@@ -148,3 +149,11 @@ firebase deploy --only hosting
 Le site est automatiquement redéployé à chaque push sur la branche `main` si une action GitHub est configurée (optionnel).
 
 👉 **Guide complet : [INSTALLATION.md](./INSTALLATION.md)**
+
+---
+
+## Écosystème Web
+
+Pour comprendre le fonctionnement et la relation entre vos outils locaux, Github, Firebase Hosting, et comment votre site est indexé par Google (Search Console) :
+
+👉 **Guide complet : [ECOSYSTEME_ET_DEPLOIEMENT.md](./ECOSYSTEME_ET_DEPLOIEMENT.md)**

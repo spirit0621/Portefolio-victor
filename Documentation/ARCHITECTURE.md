@@ -43,11 +43,19 @@ Le projet est une **Single Page Application (SPA) hybride**.
 ```text
 Portefolio/
 ├── 📄 **pages/** (Vues)
-│   ├── `index.html` : Accueil.
+│   ├── `index.html` : Accueil principal (URL racine `/`).
 │   ├── `projects.html` : Galerie dynamique (CRUD).
 │   ├── `presentation.html` : CV et parcours.
 │   ├── `contact.html` : Formulaire.
 │   └── `admin-login.html` : Interface de connexion.
+│
+├── 🌍 **Fichiers isolés (Racine)**
+│   ├── `sitemap.xml` : Plan du site pour l'indexation par Google (SEO).
+│   ├── `404.html` : Page d'erreur par défaut lorsque l'URL n'existe pas.
+│   ├── `firestore.rules` : Règles de sécurité d'accès à la base de données.
+│   ├── `google5adae1a50fc51017.html` : Fichier de validation de propriété (Google Search Console).
+│   ├── `README.md` : Présentation textuelle du projet (lisez-moi).
+│   └── `index.old.html` : Ancienne redirection d'accueil (conservée pour archive).
 │
 ├── 🎨 **styles/** (Design)
 │   └── `styles.css` : Feuille de style unique (Grid, Flexbox, Variables).
@@ -144,3 +152,5 @@ Le site utilise le **Firebase CLI** pour les mises à jour.
     - Upload les fichiers du dossier `public` (configuré comme `.` racine).
     - Met à jour les règles de sécurité Firestore (si modifiées).
     - Vide le cache du CDN pour que les changements soient immédiats.
+
+👉 **En savoir plus sur la relation Firebase / Google Search : [ECOSYSTEME_ET_DEPLOIEMENT.md](./ECOSYSTEME_ET_DEPLOIEMENT.md)**

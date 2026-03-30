@@ -73,6 +73,9 @@ L'URL de production est : `https://victor-alves-fernandes-portfolio.web.app`
 2.  **Test** : Vérifiez le rendu avec `firebase serve`.
 3.  **Commit** : Sauvegardez vos changements avec Git (`git add .`, `git commit`).
 4.  **Deploy** : Mettez en ligne avec `firebase deploy`.
+5.  **SEO (Optionnel)** : Demandez l'indexation de vos pages sur la Google Search Console.
+
+👉 **Découvrez comment ces outils interagissent : [ECOSYSTEME_ET_DEPLOIEMENT.md](./ECOSYSTEME_ET_DEPLOIEMENT.md)**
 
 ---
 

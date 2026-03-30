@@ -31,6 +31,7 @@ async function loadProjects() {
         });
         
         renderProjects();
+        populateFilters();
     } catch (error) {
         console.error("Error loading projects: ", error);
         renderProjects(); 
@@ -38,7 +39,7 @@ async function loadProjects() {
 }
 
 // Render Projects to Grid
-function renderProjects() {
+function renderProjects(projectsToRender = projects) {
     const grid = document.querySelector('.projects-grid');
     if (!grid) return;
 
@@ -52,18 +53,59 @@ function renderProjects() {
     grid.style.padding = '2rem 0';
 
 
-    if (projects.length === 0) {
-        grid.innerHTML = '<p style="text-align: center; width: 100%;">Aucun projet pour le moment.</p>';
+    if (projectsToRender.length === 0) {
+        grid.innerHTML = '<p style="text-align: center; width: 100%; color: #666; font-size: 1.1rem;">Aucun projet ne correspond à votre recherche.</p>';
         return;
     }
 
-    projects.forEach(project => {
+    projectsToRender.forEach(project => {
         const card = createProjectCard(project);
         grid.appendChild(card);
     });
     
     // Update UI visibility based on current auth state
     updateAdminUI(auth.currentUser);
+}
+
+// Populate Category and Date Filter Dropdowns
+function populateFilters() {
+    const filterSelect = document.getElementById('categoryFilter');
+    const dateSelect = document.getElementById('dateFilter');
+    if (!filterSelect || !dateSelect) return;
+
+    const uniqueCategories = new Set();
+    const uniqueDates = new Set();
+
+    projects.forEach(p => {
+        if (p.category) {
+            const tags = p.category.split(/[|:\-,]/).map(t => t.trim()).filter(t => t.length > 0);
+            tags.forEach(t => {
+                // If the tag looks like a year (4 digits)
+                if (/^\d{4}$/.test(t)) {
+                    uniqueDates.add(t);
+                } else {
+                    uniqueCategories.add(t);
+                }
+            });
+        }
+    });
+
+    filterSelect.innerHTML = '<option value="">Toutes catégories</option>';
+    Array.from(uniqueCategories).sort().forEach(tag => {
+        const option = document.createElement('option');
+        option.value = tag.toLowerCase();
+        option.textContent = tag;
+        filterSelect.appendChild(option);
+    });
+
+    dateSelect.innerHTML = '<option value="">Toutes dates</option>';
+    // Sort dates recursively (newest first)
+    Array.from(uniqueDates).sort((a, b) => b.localeCompare(a)).forEach(tag => {
+        const option = document.createElement('option');
+        option.value = tag.toLowerCase();
+        option.textContent = tag;
+        dateSelect.appendChild(option);
+    });
 }
 
 // Create Project Card HTML
@@ -81,14 +123,30 @@ function createProjectCard(project) {
     card.style.backgroundColor = 'white';
     card.style.position = 'relative'; // Ensure context
     
-    card.innerHTML = `
-        <div class="project-image-v2" style="width: 100%; height: 100%; position: relative; background: #f8f9fa; border-bottom: 1px solid #eee; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+    let imageHtml = `
+        <div class="project-image-v2" style="width: 100%; height: 100%; position: relative; background: #f8f9fa; border-bottom: 1px solid #eee; overflow: hidden; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
             <img src="${project.image}" alt="${project.title}" style="width: 100%; height: 100%; object-fit: contain; display: block;" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
-        </div>
+        </div>`;
+        
+    const link = project.link || '#';
+    if (link !== '#') {
+        if (link.startsWith('data:')) {
+            const isImage = link.startsWith('data:image');
+            const isPdf = link.indexOf('pdf') !== -1;
+            const ext = isImage ? 'jpg' : (isPdf ? 'pdf' : 'file');
+            const fileName = `projet-${project.id}.${ext}`;
+            imageHtml = `<a href="${link}" download="${fileName}" style="display: block; width: 100%; height: 100%; text-decoration: none;">${imageHtml}</a>`;
+        } else {
+            imageHtml = `<a href="${link}" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; height: 100%; text-decoration: none; cursor: pointer;">${imageHtml}</a>`;
+        }
+    }
+
+    card.innerHTML = `
+        ${imageHtml}
         <div class="project-info-v2" style="padding: 1.5rem; display: flex; flex-direction: column; background: white; overflow-y: auto;">
-            <h3 style="margin-top: 0; color: #2c3e50; font-size: 1.2rem;">${project.title}</h3>
-            <p class="project-category" style="color: #3498db; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">${project.category}</p>
-            <p style="margin-bottom: 1rem; color: #555; font-size: 0.95rem; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word;">${project.description}</p>
+            <h3 style="margin: 0 0 5px 0; color: #2c3e50; font-size: 1.2rem;">${project.title}</h3>
+            <p class="project-category" style="color: #3498db; font-weight: 600; margin: 0 0 0.5rem 0; font-size: 0.9rem;">${project.category}</p>
+            <p style="margin: 0.5rem 0 1rem 0; color: #555; font-size: 0.95rem; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word;">${project.description}</p>
             <div class="project-actions admin-only" style="display: none; margin-top: auto; padding-top: 1rem; border-top: 1px solid #eee;">
                 <button class="cta-button" style="padding: 5px 10px; font-size: 0.8rem; background-color: #f39c12; margin-right: 5px;" onclick="window.prepareEdit('${project.id}')">Modifier</button>
                 <button class="cta-button" style="padding: 5px 10px; font-size: 0.8rem; background-color: #e74c3c;" onclick="window.deleteProject('${project.id}')">Supprimer</button>
@@ -204,6 +262,33 @@ function setupEventListeners() {
         const modal = document.getElementById('projectModal');
         if (e.target === modal) closeModal();
     });
+
+    // Filtre de projets dynamique (Catégorie, Date, Texte)
+    const filterInput = document.getElementById('projectFilter');
+    const filterSelect = document.getElementById('categoryFilter');
+    const dateSelect = document.getElementById('dateFilter');
+
+    const filterHandler = () => {
+        const textTerm = filterInput ? filterInput.value.toLowerCase().trim() : '';
+        const selectTerm = filterSelect ? filterSelect.value.toLowerCase() : '';
+        const dateTerm = dateSelect ? dateSelect.value.toLowerCase() : '';
+
+        const filtered = projects.filter(p => {
+            const searchStr = (p.title + ' ' + (p.category || '') + ' ' + (p.description || '')).toLowerCase();
+            const matchesText = textTerm === '' || searchStr.includes(textTerm);
+            
+            const catStr = (p.category || '').toLowerCase();
+            const matchesCat = selectTerm === '' || catStr.includes(selectTerm);
+            const matchesDate = dateTerm === '' || catStr.includes(dateTerm);
+            
+            return matchesText && matchesCat && matchesDate;
+        });
+        renderProjects(filtered);
+    };
+
+    if (filterInput) filterInput.addEventListener('input', filterHandler);
+    if (filterSelect) filterSelect.addEventListener('change', filterHandler);
+    if (dateSelect) dateSelect.addEventListener('change', filterHandler);
 
     // Drag & Drop Logic
     setupDragAndDrop('dropZone', 'fileInput', (file, base64) => {

@@ -16,6 +16,7 @@ La documentation complète se trouve dans le dossier [`Documentation/`](./Docume
 - **[Vue d&#39;ensemble](./Documentation/README.md)** : Stack technique et fonctionnalités.
 - **[Architecture](./Documentation/ARCHITECTURE.md)** : Structure des fichiers et configuration Firebase.
 - **[Installation](./Documentation/INSTALLATION.md)** : Guide de déploiement et commandes CLI.
+- **[Écosystème et Déploiement](./Documentation/ECOSYSTEME_ET_DEPLOIEMENT.md)** : Rôle de GitHub, Firebase et Google Search.
 
 ---
 
